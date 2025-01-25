@@ -1,6 +1,6 @@
 
 
-## Fronted para el sistema en la entrevista. 
+## Fronted para el sistema de notas. 
 
 #Instalación 
   Pasos a seguir para la instalación del proyecto
