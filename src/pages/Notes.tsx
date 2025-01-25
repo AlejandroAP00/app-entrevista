@@ -1,11 +1,9 @@
 import axiosClient from "../api/axiosClient";
 import { useEffect } from "react";
 import { QueryClient, useQuery } from "@tanstack/react-query";
+import { Route, Navigate, useNavigate } from "react-router-dom";
 
-interface INote {
-    id: string,
-    contenido: string
-}
+import INote from "../types/Notes";
 
 const fetchNotes = async (): Promise<INote[]> => {
     try {
@@ -18,8 +16,9 @@ const fetchNotes = async (): Promise<INote[]> => {
 }
 
 const Notes = () => {
-    
-    const { data, isLoading, isPending } = useQuery({
+
+    let navigate = useNavigate();
+    const { data } = useQuery({
         queryKey: ['notes'],
         queryFn: fetchNotes
     });
@@ -27,6 +26,13 @@ const Notes = () => {
     return (
         <section className="mt-20">
             <div className="container mx-auto">
+                <div className="grid grid-cols-1 mb-10">
+                    <div>
+                        <button onClick={() =>  navigate("/create-note")} className="border-black p-[8px_16px] border rounded-3xl cursor-pointer">
+                            Crear nota
+                        </button>
+                    </div>
+                </div>
                 <div className="grid grid-cols-3 gap-[8px]">
                     {data?.map((note) => (
                         <div className="nota border-2  rounded-2xl p-[8px]" key={note.id}>
